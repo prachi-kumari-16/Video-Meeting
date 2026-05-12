@@ -1,7 +1,10 @@
+import dotenv from "dotenv";
 
+dotenv.config();
 import express from "express";
 import {createServer} from "node:http";
 import {Server} from "socket.io";
+
 
 import mongoose from "mongoose";
 import { connectToSocket } from "./src/controllers/socketManager.js";
@@ -29,7 +32,7 @@ app.use("/api/v1/users", userRoutes);
 
 const start = async() => {
 app.set("mongo_user")
-    const connectionDb = await mongoose.connect("mongodb+srv://prachiSharma:Prachi12345@zoom.ch2v1n8.mongodb.net/?appName=Zoom");
+    const connectionDb = await mongoose.connect(process.env.MONGO_URI);
    
     console.log(`MONGO connected DB Host: ${connectionDb.connection.host}`);
     
